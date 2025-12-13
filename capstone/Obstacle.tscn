@@ -4,13 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://v5y415gjjcmf" path="res://Obstacle Visual.png" id="2_0pemi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4784"]
-radius = 148.95973
+radius = 89.026855
 
 [node name="Obstacle" type="Area2D"]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_qaun2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(564, 300)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_0pemi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -18,8 +20,8 @@ position = Vector2(566, 304)
 shape = SubResource("CircleShape2D_o4784")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(472, 148)
-rect = Rect2(-10, 20, 212, 258)
+position = Vector2(525.3333, 232)
+rect = Rect2(-10, 20, 108, 101)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

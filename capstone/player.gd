@@ -8,7 +8,8 @@ var current_lane = 1 # Start in the middle (0, 1, 2)
 
 func _ready():
 	# Snap to starting position
-	position = Vector2(lane_positions[current_lane], 800) 
+	position = Vector2(lane_positions[current_lane], 720)
+
 
 func _input(event):
 	if Input.is_action_just_pressed("move_left"):

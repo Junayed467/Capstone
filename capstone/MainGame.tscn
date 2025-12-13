@@ -8,28 +8,29 @@
 [ext_resource type="AudioStream" uid="uid://be30xqdgmlr2b" path="res://ambient-simplicity-136218.mp3" id="5_8qpgq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt8"]
-size = Vector2(3116, 20)
+size = Vector2(279.375, 191.4375)
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_ws5ob")
 obstacle_scene = ExtResource("2_bqqt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(42, -30)
-scale = Vector2(2.541, 3)
+position = Vector2(270, 525.15247)
+scale = Vector2(1.124, 0.7952959)
 texture = ExtResource("1_e3m3f")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(-727, 68)
+scale = Vector2(0.3, 0.3)
 script = ExtResource("4_pv6b4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(740, 235.99988)
-scale = Vector2(0.8764205, 0.68624145)
+position = Vector2(963.00006, 524)
+scale = Vector2(0.262, 0.25)
 texture = ExtResource("2_ws5ob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(1548, 0)
+position = Vector2(943, 527)
 shape = SubResource("RectangleShape2D_bqqt8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

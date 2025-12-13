@@ -9,6 +9,7 @@ var score: int = 0
 var game_active: bool = false
 
 func _ready():
+	randomize()
 	# Register this node to the "game_manager" group so Obstacles can find it
 	add_to_group("game_manager")
 	
