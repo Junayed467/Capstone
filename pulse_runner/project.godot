@@ -1,0 +1,25 @@
+; Engine configuration file.
+; This file controls the global settings for the Pulse Runner project.
+
+[application]
+config/name="Pulse Runner"
+config/description="Rhythm‑based three lane endless runner"
+run/main_scene="res://StartMenu.tscn"
+
+[rendering]
+# Use the default Vulkan renderer in Godot 4.  If you are on a platform that
+# doesn't support Vulkan you can switch to the Mobile/Compatibility renderer
+# in the editor later on.
+quality/driver/driver_name="vulkan"
+
+[display]
+# Set an aspect ratio friendly for a mobile/portrait layout.  The scene will
+# automatically stretch to the device's resolution while preserving aspect.
+window/size/width=540
+window/size/height=960
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+# Input actions are defined in scripts for simplicity.  The built in
+# `ui_left` and `ui_right` actions are used for lane switching so you
+# don't need to define a custom input map here.
