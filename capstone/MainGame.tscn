@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://kwlxmtcx63sv"]
+[gd_scene load_steps=10 format=3 uid="uid://kwlxmtcx63sv"]
 
 [ext_resource type="Texture2D" uid="uid://bauul3l5r0kyn" path="res://Background Visual.png" id="1_e3m3f"]
 [ext_resource type="Script" uid="uid://cb3agxktvdhao" path="res://MainGame.gd" id="1_ws5ob"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c33xsterrld1y" path="res://player.gd" id="4_pv6b4"]
 [ext_resource type="AudioStream" uid="uid://be30xqdgmlr2b" path="res://ambient-simplicity-136218.mp3" id="5_8qpgq"]
 [ext_resource type="Texture2D" uid="uid://dpdn8jj8dwtag" path="res://Pulse Runner Visual.png" id="6_8dnxm"]
+[ext_resource type="Texture2D" uid="uid://bkv3bop4rw8jm" path="res://TutorialImage.png" id="7_v3hs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt8"]
 size = Vector2(279.375, 191.4375)
@@ -139,6 +140,12 @@ text = "HOW TO PLAY
 
 PRESS SPACE TO START
 "
+
+[node name="TutorialImage" type="TextureRect" parent="CanvasLayer/TutorialUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("7_v3hs3")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_8qpgq")
