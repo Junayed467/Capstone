@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://kwlxmtcx63sv"]
+
+[ext_resource type="Texture2D" uid="uid://bauul3l5r0kyn" path="res://Background Visual.png" id="1_e3m3f"]
+[ext_resource type="Script" uid="uid://cb3agxktvdhao" path="res://MainGame.gd" id="1_ws5ob"]
+[ext_resource type="PackedScene" uid="uid://cl1h62oafvvpv" path="res://Obstacle.tscn" id="2_bqqt8"]
+[ext_resource type="Texture2D" uid="uid://cw7fgoey1tbkv" path="res://Character Visual.png" id="2_ws5ob"]
+[ext_resource type="Script" uid="uid://c33xsterrld1y" path="res://player.gd" id="4_pv6b4"]
+[ext_resource type="AudioStream" uid="uid://be30xqdgmlr2b" path="res://ambient-simplicity-136218.mp3" id="5_8qpgq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt8"]
+size = Vector2(3116, 20)
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource("1_ws5ob")
+obstacle_scene = ExtResource("2_bqqt8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(42, -30)
+scale = Vector2(2.541, 3)
+texture = ExtResource("1_e3m3f")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-727, 68)
+script = ExtResource("4_pv6b4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(740, 235.99988)
+scale = Vector2(0.8764205, 0.68624145)
+texture = ExtResource("2_ws5ob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(1548, 0)
+shape = SubResource("RectangleShape2D_bqqt8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StartUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/StartUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "PRESS SPACE TO START"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameOverUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/GameOverUI"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "GAME OVER"
+metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/ScoreLabel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_8qpgq")
