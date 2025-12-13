@@ -8,6 +8,9 @@ var time_tracker: float = 0.0
 var score: int = 0
 var game_active: bool = false
 
+# NEW: tracks whether we're currently on the tutorial screen
+var tutorial_active: bool = false
+
 func _ready():
 	randomize()
 	# Register this node to the "game_manager" group so Obstacles can find it
@@ -15,16 +18,26 @@ func _ready():
 	
 	beat_interval = 60.0 / float(bpm)
 	
-	# SETUP UI FOR START (Tutorial State)
+	# SETUP UI FOR START
 	$CanvasLayer/GameOverUI.hide()
 	$CanvasLayer/StartUI.show()
-	$Player.hide() 
+	$CanvasLayer/TutorialUI.hide()
+	$Player.hide()
 
 func _process(delta):
 	if !game_active:
-		# GAME START LOGIC
+		# If tutorial is showing, Space should start the game
+		if tutorial_active:
+			if Input.is_action_just_pressed("restart"):
+				start_game()
+			return
+		
+		# GAME START LOGIC (first input)
 		if Input.is_action_just_pressed("restart") or Input.is_action_just_pressed("move_left") or Input.is_action_just_pressed("move_right"):
-			start_game()
+			$CanvasLayer/TitleUI.hide()
+			$CanvasLayer/StartUI.hide()
+			$CanvasLayer/TutorialUI.show()
+			tutorial_active = true
 		return
 
 	# GAMEPLAY LOOP
@@ -38,12 +51,15 @@ func _process(delta):
 		$CanvasLayer/ScoreLabel.text = str(score)
 
 func start_game():
+	# Hide tutorial now that we're starting gameplay
+	$CanvasLayer/TutorialUI.hide()
+	tutorial_active = false
+	
 	game_active = true
 	score = 0
 	time_tracker = 0.0
 	
 	# Reset UI
-	$CanvasLayer/StartUI.hide()
 	$CanvasLayer/GameOverUI.hide()
 	$CanvasLayer/ScoreLabel.text = "0"
 	$CanvasLayer/ScoreLabel.show()
