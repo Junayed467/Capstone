@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://v5y415gjjcmf" path="res://Obstacle Visual.png" id="2_0pemi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o4784"]
-radius = 89.026855
+radius = 64.66669
 
 [node name="Obstacle" type="Area2D"]
 scale = Vector2(0.75, 0.75)

@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dde5q1bh4qb8g" path="res://TutorialUI Image.png" id="7_v3hs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt8"]
-size = Vector2(279.375, 191.4375)
+size = Vector2(186, 148)
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_ws5ob")
@@ -34,7 +34,7 @@ scale = Vector2(0.262, 0.25)
 texture = ExtResource("2_ws5ob")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(943, 527)
+position = Vector2(963, 524)
 shape = SubResource("RectangleShape2D_bqqt8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
