@@ -17,8 +17,8 @@ script = ExtResource("1_ws5ob")
 obstacle_scene = ExtResource("2_bqqt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(270, 525.15247)
-scale = Vector2(1.124, 0.7952959)
+position = Vector2(960, 540)
+scale = Vector2(2.828, 2)
 texture = ExtResource("1_e3m3f")
 
 [node name="Camera2D" type="Camera2D" parent="Sprite2D"]
