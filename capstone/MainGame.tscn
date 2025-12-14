@@ -16,16 +16,16 @@ size = Vector2(279.375, 191.4375)
 script = ExtResource("1_ws5ob")
 obstacle_scene = ExtResource("2_bqqt8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Road" type="Sprite2D" parent="." groups=["world"]]
 position = Vector2(960, 540)
 scale = Vector2(2.828, 2)
 texture = ExtResource("1_e3m3f")
 
-[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+[node name="Camera2D" type="Camera2D" parent="Road"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(-727, 68)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("4_pv6b4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]

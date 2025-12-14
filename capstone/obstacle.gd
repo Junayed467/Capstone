@@ -1,5 +1,7 @@
 extends Area2D
+
 var speed = 600.0
+var lane_idx: int = -1
 
 func _ready() -> void:
 	add_to_group("obstacles")
@@ -7,9 +9,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position.y += speed * delta
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
 
-func _on_body_entered(body):
+func _on_body_entered(body) -> void:
 	if body.name == "Player":
 		get_tree().call_group("game_manager", "game_over")
