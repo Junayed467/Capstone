@@ -39,20 +39,6 @@ shape = SubResource("RectangleShape2D_bqqt8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="StartUI" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="Label" type="Label" parent="CanvasLayer/StartUI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "PRESS SPACE TO START"
-metadata/_edit_use_anchors_ = true
-
 [node name="GameOverUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
@@ -92,10 +78,10 @@ anchor_left = -0.39000002
 anchor_top = 1.1110001
 anchor_right = 1.871
 anchor_bottom = 3.3500001
-offset_left = -817.4
-offset_top = 14.559998
-offset_right = 2571.16
-offset_bottom = 1036.0
+offset_left = -810.4
+offset_top = 5.5599976
+offset_right = 2578.16
+offset_bottom = 1027.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_8dnxm")
@@ -120,19 +106,26 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="dim" type="ColorRect" parent="CanvasLayer/TutorialUI"]
+[node name="TutorialImage" type="TextureRect" parent="CanvasLayer/TutorialUI"]
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -850.0
+offset_top = 80.0
+offset_right = 2589.0
+offset_bottom = 1640.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+texture = ExtResource("7_v3hs3")
 
 [node name="TutorialText" type="Label" parent="CanvasLayer/TutorialUI"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_right = 223.0
+offset_bottom = 179.0
 text = "HOW TO PLAY
 ← / → : switch lanes
 - Dodge the notes 
@@ -140,12 +133,6 @@ text = "HOW TO PLAY
 
 PRESS SPACE TO START
 "
-
-[node name="TutorialImage" type="TextureRect" parent="CanvasLayer/TutorialUI"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("7_v3hs3")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_8qpgq")
