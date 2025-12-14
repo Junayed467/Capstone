@@ -109,15 +109,16 @@ offset_bottom = 40.0
 [node name="TutorialImage" type="TextureRect" parent="CanvasLayer/TutorialUI"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -850.0
+offset_left = -150.0
 offset_top = 80.0
-offset_right = 2589.0
-offset_bottom = 1640.0
+offset_right = 3289.0
+offset_bottom = 1151.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("7_v3hs3")
 
 [node name="TutorialText" type="Label" parent="CanvasLayer/TutorialUI"]
