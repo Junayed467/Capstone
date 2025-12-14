@@ -1,117 +1,92 @@
 extends Node2D
 
-@export var obstacle_scene: PackedScene # Drag Obstacle.tscn here
-@export var bpm: int = 120 # Matches your music
+@export var obstacle_scene: PackedScene
+@export var bpm: int = 120
 
-var beat_interval: float = 0.0
-var time_tracker: float = 0.0
-var score: int = 0
-var game_active: bool = false
+var beat_interval := 0.0
+var time_tracker := 0.0
+var score := 0
 
-# Tracks whether we're currently on the tutorial screen
-var tutorial_active: bool = false
+enum State { TITLE, TUTORIAL, PLAYING, GAME_OVER }
+var state: State = State.TITLE
 
-# NEW: Tracks if we are currently on the title screen
-var title_active: bool = true
+@onready var title_ui: Control = $CanvasLayer/TitleUI
+@onready var tutorial_ui: Control = $CanvasLayer/TutorialUI
+@onready var game_over_ui: Control = $CanvasLayer/GameOverUI
+@onready var score_label: Label = $CanvasLayer/ScoreLabel
+@onready var player: Node = $Player
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	add_to_group("game_manager")
-
 	beat_interval = 60.0 / float(bpm)
 
-	# Initial UI state: Title only
-	$CanvasLayer/GameOverUI.hide()
-	$CanvasLayer/TutorialUI.hide()
-	$CanvasLayer/TitleUI.show()
-	$CanvasLayer/ScoreLabel.hide()
-	$Player.hide()
+	_set_state(State.TITLE)
 
-	# If you have a TitleUI label node, set it here:
-	# Adjust the path if needed (common name from earlier: TitlePrompt)
-	if has_node("CanvasLayer/TitleUI/TitlePrompt"):
-		$CanvasLayer/TitleUI/TitlePrompt.text = "PRESS SPACE TO START"
-
-func _process(delta):
-	if !game_active:
-		# If tutorial is showing, Space starts the game
-		if tutorial_active:
-			if Input.is_action_just_pressed("restart"):
-				start_game()
-			return
-
-		# If title is showing, Space (or optional left/right) goes to tutorial
-		if title_active:
-			if Input.is_action_just_pressed("restart") \
-			or Input.is_action_just_pressed("move_left") \
-			or Input.is_action_just_pressed("move_right"):
-				$CanvasLayer/TitleUI.hide()
-				$CanvasLayer/TutorialUI.show()
-				title_active = false
-				tutorial_active = true
-			return
-
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("restart"): # your Space action
 		return
 
-	# GAMEPLAY LOOP
-	time_tracker += delta
+	match state:
+		State.TITLE:
+			_set_state(State.TUTORIAL)
+		State.TUTORIAL:
+			start_game()
+		State.GAME_OVER:
+			_set_state(State.TITLE)
+		State.PLAYING:
+			pass
 
-	# Spawn on the Beat
+func _process(delta: float) -> void:
+	if state != State.PLAYING:
+		return
+
+	time_tracker += delta
 	if time_tracker >= beat_interval:
 		time_tracker -= beat_interval
 		spawn_obstacle()
 		score += 1
-		$CanvasLayer/ScoreLabel.text = str(score)
+		score_label.text = str(score)
 
-func start_game():
-	# Hide tutorial now that we're starting gameplay
-	$CanvasLayer/TutorialUI.hide()
-	tutorial_active = false
+func _set_state(new_state: State) -> void:
+	state = new_state
 
-	game_active = true
+	title_ui.visible = (state == State.TITLE)
+	tutorial_ui.visible = (state == State.TUTORIAL)
+	game_over_ui.visible = (state == State.GAME_OVER)
+	score_label.visible = (state == State.PLAYING)
+
+	player.visible = (state == State.PLAYING)
+	player.set_process_input(state == State.PLAYING)
+
+	if state != State.PLAYING:
+		$MusicPlayer.stop()
+
+func start_game() -> void:
+	# reset gameplay
 	score = 0
 	time_tracker = 0.0
+	score_label.text = "0"
 
-	# Reset UI
-	$CanvasLayer/GameOverUI.hide()
-	$CanvasLayer/ScoreLabel.text = "0"
-	$CanvasLayer/ScoreLabel.show()
+	get_tree().call_group("obstacles", "queue_free")
 
-	# Reset Player
-	$Player.show()
+	# reset player
 	$Player.current_lane = 1
 	$Player.update_position()
 
-	# Play Music
 	if $MusicPlayer.stream:
 		$MusicPlayer.play()
 
-func spawn_obstacle():
+	_set_state(State.PLAYING)
+
+func spawn_obstacle() -> void:
 	var obs = obstacle_scene.instantiate()
-
-	# Pick random lane
 	var lane_idx = randi() % 3
-	var x_pos = [90, 270, 450][lane_idx] # Must match Player.gd positions
-
+	var x_pos = [90, 270, 450][lane_idx]
 	obs.position = Vector2(x_pos, -100)
 	add_child(obs)
 
-func game_over():
-	game_active = false
-	$MusicPlayer.stop()
-
-	# Clear existing obstacles
+func game_over() -> void:
 	get_tree().call_group("obstacles", "queue_free")
-
-	$CanvasLayer/GameOverUI.show()
-	$CanvasLayer/ScoreLabel.hide()
-
-	# IMPORTANT: Do NOT show tutorial here.
-	# Reset flow so next Space returns to Title -> Tutorial -> Game
-	$CanvasLayer/TutorialUI.hide()
-	$CanvasLayer/TitleUI.show()
-	title_active = true
-	tutorial_active = false
-
-	# Optional: reset player visibility on game over
-	$Player.hide()
+	$MusicPlayer.stop()
+	_set_state(State.GAME_OVER)

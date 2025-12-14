@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c33xsterrld1y" path="res://player.gd" id="4_pv6b4"]
 [ext_resource type="AudioStream" uid="uid://be30xqdgmlr2b" path="res://ambient-simplicity-136218.mp3" id="5_8qpgq"]
 [ext_resource type="Texture2D" uid="uid://dpdn8jj8dwtag" path="res://Pulse Runner Visual.png" id="6_8dnxm"]
-[ext_resource type="Texture2D" uid="uid://bkv3bop4rw8jm" path="res://TutorialImage.png" id="7_v3hs3"]
+[ext_resource type="Texture2D" uid="uid://dde5q1bh4qb8g" path="res://TutorialUI Image.png" id="7_v3hs3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqqt8"]
 size = Vector2(279.375, 191.4375)
@@ -121,6 +121,7 @@ grow_vertical = 2
 texture = ExtResource("7_v3hs3")
 
 [node name="TutorialText" type="Label" parent="CanvasLayer/TutorialUI"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
